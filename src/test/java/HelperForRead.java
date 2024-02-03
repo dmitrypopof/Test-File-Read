@@ -3,7 +3,7 @@ import org.junit.jupiter.api.DisplayName;
 import java.io.*;
 import java.util.Random;
 
-public class ReadFromFile {
+public class HelperForRead {
 
     @DisplayName("Получение рандомного числа")
     public int getRandomValueLine(int rangeLine) {
