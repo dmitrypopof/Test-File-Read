@@ -5,19 +5,19 @@ import java.util.Random;
 
 public class HelperForRead {
 
-    @DisplayName("Получение рандомного числа")
+    @DisplayName("РџРѕР»СѓС‡РµРЅРёРµ СЂР°РЅРґРѕРјРЅРѕРіРѕ С‡РёСЃР»Р°")
     public int getRandomValueLine(int rangeLine) {
         Random random = new Random();
-        int randValue = random.nextInt(rangeLine) + 1; // от 1 до ..
+        int randValue = random.nextInt(rangeLine) + 1; // РѕС‚ 1 РґРѕ ..
         return randValue;
     }
 
-    @DisplayName("Получение строки из полученного рандомного числа {arg0} , файла {arg1}")
+    @DisplayName("РџРѕР»СѓС‡РµРЅРёРµ СЃС‚СЂРѕРєРё РёР· РїРѕР»СѓС‡РµРЅРЅРѕРіРѕ СЂР°РЅРґРѕРјРЅРѕРіРѕ С‡РёСЃР»Р° {arg0} , С„Р°Р№Р»Р° {arg1}")
     public String readLine(int randomValue, String pathNameFile) throws IOException {
 
-        int targetLineNumber = 6; // Номер целевой строки
+        int targetLineNumber = 6; // РќРѕРјРµСЂ С†РµР»РµРІРѕР№ СЃС‚СЂРѕРєРё
 
-        // Получение потока ввода для файла из папки ресурсов
+        // РџРѕР»СѓС‡РµРЅРёРµ РїРѕС‚РѕРєР° РІРІРѕРґР° РґР»СЏ С„Р°Р№Р»Р° РёР· РїР°РїРєРё СЂРµСЃСѓСЂСЃРѕРІ
         InputStream inputStream = TestFileRockyou.class.getResourceAsStream(pathNameFile);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
@@ -26,7 +26,7 @@ public class HelperForRead {
 
         while ((line = bufferedReader.readLine()) != null) {
             if (lineNumber == randomValue) {
-                System.out.println(line); // Выводим целевую строку
+                System.out.println(line); // Р’С‹РІРѕРґРёРј С†РµР»РµРІСѓСЋ СЃС‚СЂРѕРєСѓ
                 break;
             }
             lineNumber++;
@@ -34,11 +34,16 @@ public class HelperForRead {
         return line;
     }
 
-    @DisplayName("Узнать количество строк в файле {arg0}")
-    public int getCountLine(String pathFile) {
+    @DisplayName("РЈР·РЅР°С‚СЊ РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕРє РІ С„Р°Р№Р»Рµ {arg0}")
+    public int getCountLine(String pathFile) throws FileNotFoundException {
+        //        InputStream inputStream = TestFileRockyou.class.getResourceAsStream(pathFile);
+        String absPath = System.getProperty("user.dir");
         int lineCount = 0;
-        InputStream inputStream = TestFileRockyou.class.getResourceAsStream(pathFile);
-        try (      BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
+
+        FileInputStream fileInputStream = new FileInputStream(absPath+"\\src\\test\\resources\\rockyou-25.txt");
+        InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+
+        try (      BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
             while (bufferedReader.readLine() != null) {
                 lineCount++;
             }
